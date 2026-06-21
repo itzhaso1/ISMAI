@@ -50,7 +50,8 @@ class AppServiceProvider extends ServiceProvider
         try {
             return Cache::remember('settings.public', now()->addMinutes(30), fn () => Setting::query()
                 ->where('is_public', true)
-                ->pluck('value', 'key'));
+                ->get()
+                ->mapWithKeys(fn (Setting $setting) => [$setting->key => $setting->value]));
         } catch (Throwable) {
             return collect();
         }
