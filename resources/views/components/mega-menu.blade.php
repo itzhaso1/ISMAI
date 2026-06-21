@@ -8,9 +8,7 @@
                 @forelse($categories as $category)
                     <div class="mega-column">
                         <a class="mega-title" href="{{ route('categories.show', $category) }}">{{ $category->localizedName() }}</a>
-                        @foreach($category->children as $child)
-                            <a href="{{ route('categories.show', $child) }}">{{ $child->localizedName() }}</a>
-                        @endforeach
+                        <x-category-tree :category="$category" />
                     </div>
                 @empty
                     <div class="mega-column">

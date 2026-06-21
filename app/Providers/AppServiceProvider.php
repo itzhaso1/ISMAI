@@ -2,12 +2,9 @@
 
 namespace App\Providers;
 
-use App\Models\Category;
-use App\Models\Setting;
-use App\Models\SocialLink;
+use App\Services\SiteSettingsManager;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Throwable;
@@ -35,11 +32,7 @@ class AppServiceProvider extends ServiceProvider
     private function navigationCategories(): Collection
     {
         try {
-            return Cache::remember('navigation.categories', now()->addMinutes(30), fn () => Category::active()
-                ->whereNull('parent_id')
-                ->with(['children' => fn ($query) => $query->active()->orderBy('sort_order')])
-                ->orderBy('sort_order')
-                ->get());
+            return app(SiteSettingsManager::class)->navigationCategories();
         } catch (Throwable) {
             return collect();
         }
@@ -48,10 +41,7 @@ class AppServiceProvider extends ServiceProvider
     private function publicSettings(): Collection
     {
         try {
-            return Cache::remember('settings.public', now()->addMinutes(30), fn () => Setting::query()
-                ->where('is_public', true)
-                ->get()
-                ->mapWithKeys(fn (Setting $setting) => [$setting->key => $setting->value]));
+            return app(SiteSettingsManager::class)->publicSettings();
         } catch (Throwable) {
             return collect();
         }
@@ -60,9 +50,7 @@ class AppServiceProvider extends ServiceProvider
     private function socialLinks(): Collection
     {
         try {
-            return Cache::remember('social.links', now()->addMinutes(30), fn () => SocialLink::active()
-                ->orderBy('sort_order')
-                ->get());
+            return app(SiteSettingsManager::class)->socialLinks();
         } catch (Throwable) {
             return collect();
         }

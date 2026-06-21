@@ -36,7 +36,7 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-## ما تم إنجازه في المرحلة الأولى
+## ما تم إنجازه
 
 1. إنشاء Laravel Project Structure.
 2. إعداد MySQL في `.env.example` و`config/database.php`.
@@ -46,6 +46,12 @@ DB_PASSWORD=
 6. إنشاء Navbar احترافي Sticky/Responsive/Animated.
 7. إنشاء Mega Menu للأقسام.
 8. إنشاء Hero Slider Full Width مع Auto Slide وCTA.
+9. إنشاء Admin Panel منفصل ومحمي بـ Admin role.
+10. CRUD كامل للمنتجات، الأقسام، البراندات، السلايدر، المستخدمين، الطلبات، السوشيال، والنصوص الثابتة.
+11. Site Settings Manager لإدارة اللوجو، اسم الموقع، أرقام الهاتف، الإيميل، العنوان، الفوتر، والتحكم بأقسام الصفحة الرئيسية.
+12. Multiple product images مع upload/delete من لوحة التحكم.
+13. Nested dynamic categories داخل Mega Menu.
+14. Caching للإعدادات والأقسام وروابط التواصل، مع eager loading وpagination.
 
 ## بيانات الدخول التجريبية بعد seed
 
@@ -64,3 +70,17 @@ Password: password
 - `/language/ar` و`/language/en` تبديل اللغة
 - `/login`, `/register`, `/forgot-password`
 - `/admin` بداية لوحة التحكم
+
+## ملفات Backend الأساسية
+
+- `app/Services/SiteSettingsManager.php`
+- `app/Http/Middleware/EnsureAdmin.php`
+- `app/Http/Controllers/Admin/*Controller.php`
+- `routes/admin.php`
+- `resources/views/layouts/admin.blade.php`
+- `resources/views/admin/**`
+
+## ملاحظات تشغيل مهمة
+
+- الصور المرفوعة تحفظ على Laravel public disk وتخدم عبر `/storage/{path}` بدون الحاجة لتشغيل `php artisan storage:link` في بيئة التطوير.
+- بعد `php artisan migrate --seed` يمكن تسجيل الدخول إلى `/admin` ببيانات الأدمن التجريبية أدناه.

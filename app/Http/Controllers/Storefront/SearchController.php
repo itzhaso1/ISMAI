@@ -26,7 +26,7 @@ class SearchController extends Controller
                 'name' => $product->localizedName(),
                 'category' => $product->category?->localizedName(),
                 'price' => number_format((float) $product->price, 2),
-                'image' => $product->main_image_path ? asset('storage/'.$product->main_image_path) : asset('images/product-placeholder.svg'),
+                'image' => $product->mainImageUrl(),
                 'url' => route('products.show', $product),
             ]);
 

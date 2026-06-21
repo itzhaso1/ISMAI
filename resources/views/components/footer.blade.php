@@ -1,14 +1,20 @@
 @php
     $locale = app()->getLocale();
     $siteName = data_get($publicSettings->get('site_name'), $locale, __('messages.brand'));
-    $phone = data_get($publicSettings->get('phone'), 'value', '+'.config('services.whatsapp.number'));
+    $phones = collect($publicSettings->get('phone_numbers') ?? [data_get($publicSettings->get('phone'), 'value', '+'.config('services.whatsapp.number'))])->filter();
     $email = data_get($publicSettings->get('email'), 'value', 'sales@example.com');
+    $address = data_get($publicSettings->get('address'), $locale);
+    $description = data_get($publicSettings->get('footer_description'), $locale, __('messages.footer.description'));
+    $logoPath = data_get($publicSettings->get('logo'), 'path');
 @endphp
 <footer class="site-footer">
     <div class="footer-grid">
         <div>
-            <a class="brand-mark footer-brand" href="{{ route('home') }}"><span class="brand-icon">IS</span><span class="brand-text">{{ $siteName }}</span></a>
-            <p>{{ __('messages.footer.description') }}</p>
+            <a class="brand-mark footer-brand" href="{{ route('home') }}">
+                @if($logoPath)<img class="brand-logo" src="{{ asset('storage/'.$logoPath) }}" alt="{{ $siteName }}">@else<span class="brand-icon">IS</span>@endif
+                <span class="brand-text">{{ $siteName }}</span>
+            </a>
+            <p>{{ $description }}</p>
         </div>
         <div>
             <h3>{{ __('messages.footer.quick_links') }}</h3>
@@ -19,8 +25,11 @@
         </div>
         <div>
             <h3>{{ __('messages.footer.contact') }}</h3>
-            <span>{{ $phone }}</span>
+            @foreach($phones as $phone)
+                <span>{{ $phone }}</span>
+            @endforeach
             <span>{{ $email }}</span>
+            @if($address)<span>{{ $address }}</span>@endif
             <div class="social-links">
                 @forelse($socialLinks as $link)
                     <a href="{{ $link->url }}" target="_blank" rel="noopener">{{ $link->label }}</a>

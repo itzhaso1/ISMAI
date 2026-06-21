@@ -104,4 +104,17 @@ class Product extends Model
 
         return $locale === 'ar' ? $this->short_description_ar : $this->short_description_en;
     }
+
+    public function mainImageUrl(): string
+    {
+        if (! $this->main_image_path) {
+            return asset('images/product-placeholder.svg');
+        }
+
+        if (str_starts_with($this->main_image_path, 'images/') || str_starts_with($this->main_image_path, 'http')) {
+            return asset($this->main_image_path);
+        }
+
+        return asset('storage/'.$this->main_image_path);
+    }
 }

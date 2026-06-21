@@ -10,10 +10,10 @@
 @endphp
 <section class="section-shell product-detail">
     <div class="product-gallery">
-        <img class="main-product-image" src="{{ $product->main_image_path ? asset('storage/'.$product->main_image_path) : asset('images/product-placeholder.svg') }}" alt="{{ $product->localizedName() }}">
+        <img class="main-product-image" src="{{ $product->mainImageUrl() }}" alt="{{ $product->localizedName() }}">
         <div class="thumb-row">
             @foreach($product->images as $image)
-                <img loading="lazy" src="{{ asset('storage/'.$image->image_path) }}" alt="{{ app()->getLocale() === 'ar' ? $image->alt_text_ar : $image->alt_text_en }}">
+                <img loading="lazy" src="{{ $image->url() }}" alt="{{ app()->getLocale() === 'ar' ? $image->alt_text_ar : $image->alt_text_en }}">
             @endforeach
         </div>
     </div>

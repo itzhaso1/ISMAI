@@ -5,7 +5,7 @@
 @endphp
 <article class="product-card">
     <a class="product-media" href="{{ route('products.show', $product) }}">
-        <img loading="lazy" src="{{ $product->main_image_path ? asset('storage/'.$product->main_image_path) : asset('images/product-placeholder.svg') }}" alt="{{ $product->localizedName() }}">
+        <img loading="lazy" src="{{ $product->mainImageUrl() }}" alt="{{ $product->localizedName() }}">
         @if($product->brand)
             <span>{{ $product->brand->name }}</span>
         @endif

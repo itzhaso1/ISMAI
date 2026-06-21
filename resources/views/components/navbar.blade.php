@@ -1,17 +1,24 @@
 @php
     $locale = app()->getLocale();
     $nextLocale = $locale === 'ar' ? 'en' : 'ar';
+    $siteName = data_get($publicSettings->get('site_name'), $locale, __('messages.brand'));
+    $logoPath = data_get($publicSettings->get('logo'), 'path');
+    $phone = collect($publicSettings->get('phone_numbers') ?? [data_get($publicSettings->get('phone'), 'value', '+'.config('services.whatsapp.number'))])->filter()->first();
 @endphp
 <header class="site-header" data-site-header>
     <div class="top-line">
         <span>{{ __('messages.hero.eyebrow') }}</span>
-        <span>WhatsApp: +{{ config('services.whatsapp.number') }}</span>
+        <span>WhatsApp: {{ $phone }}</span>
     </div>
 
     <div class="nav-shell">
-        <a class="brand-mark" href="{{ route('home') }}" aria-label="{{ __('messages.brand') }}">
-            <span class="brand-icon">IS</span>
-            <span class="brand-text">{{ __('messages.brand') }}</span>
+        <a class="brand-mark" href="{{ route('home') }}" aria-label="{{ $siteName }}">
+            @if($logoPath)
+                <img class="brand-logo" src="{{ asset('storage/'.$logoPath) }}" alt="{{ $siteName }}">
+            @else
+                <span class="brand-icon">IS</span>
+            @endif
+            <span class="brand-text">{{ $siteName }}</span>
         </a>
 
         <button class="nav-toggle" type="button" data-nav-toggle aria-controls="primary-nav" aria-expanded="false">

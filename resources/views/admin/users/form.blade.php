@@ -1,0 +1,7 @@
+@extends('layouts.admin')
+@section('title', $user->exists ? 'Edit User' : 'New User')
+@section('page_title', $user->exists ? 'Edit User' : 'New User')
+@section('content')
+<form class="admin-panel admin-form" method="POST" action="{{ $user->exists ? route('admin.users.update', $user) : route('admin.users.store') }}">@csrf @if($user->exists) @method('PUT') @endif
+<div class="form-grid"><label>Name<input name="name" value="{{ old('name', $user->name) }}" required></label><label>Email<input type="email" name="email" value="{{ old('email', $user->email) }}" required></label><label>Phone<input name="phone" value="{{ old('phone', $user->phone) }}"></label><label>Role<select name="role" required><option value="customer" @selected(old('role', $user->role) === 'customer')>Customer</option><option value="admin" @selected(old('role', $user->role) === 'admin')>Admin</option></select></label><label>Locale<select name="locale" required><option value="ar" @selected(old('locale', $user->locale ?: 'ar') === 'ar')>Arabic</option><option value="en" @selected(old('locale', $user->locale) === 'en')>English</option></select></label><label>Password<input type="password" name="password" @required(! $user->exists)></label><label>Confirm password<input type="password" name="password_confirmation" @required(! $user->exists)></label></div><div class="check-grid"><label><input type="checkbox" name="is_active" value="1" @checked(old('is_active', $user->is_active ?? true))> Active</label></div><button class="btn-primary" type="submit">Save User</button></form>
+@endsection

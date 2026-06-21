@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('category_id')->constrained()->restrictOnDelete();
             $table->foreignId('brand_id')->nullable()->constrained()->nullOnDelete();
-            $table->string('sku')->unique();
+            $table->string('sku')->nullable()->unique();
             $table->string('name_ar');
             $table->string('name_en');
             $table->string('slug')->unique();

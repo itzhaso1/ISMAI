@@ -5,6 +5,7 @@
 @section('content')
     <x-hero-slider :sliders="$sliders" />
 
+    @if(data_get($sections, 'featured_categories', true))
     <section class="section-shell">
         <div class="section-heading">
             <span>{{ __('messages.nav.categories') }}</span>
@@ -34,7 +35,9 @@
             @endforelse
         </div>
     </section>
+    @endif
 
+    @if(data_get($sections, 'featured_products', true))
     <section class="section-shell muted-section">
         <div class="section-heading split-heading">
             <div>
@@ -52,7 +55,9 @@
             @endforelse
         </div>
     </section>
+    @endif
 
+    @if(data_get($sections, 'brands', true))
     <section class="section-shell brands-section">
         <div class="section-heading">
             <span>{{ __('messages.home.brands') }}</span>
@@ -77,4 +82,5 @@
             </div>
         </div>
     </section>
+    @endif
 @endsection
