@@ -580,3 +580,78 @@ button, input, select { font: inherit; }
     .category-card-image { height: 130px; }
     .admin-grid { grid-template-columns: 1fr; }
 }
+
+
+/* Homepage all-categories grid and mobile navbar action drawer */
+.mobile-menu-actions { display: none; }
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+}
+.category-grid .category-card {
+    grid-template-columns: 1fr;
+    min-height: auto;
+}
+.category-grid .category-card-image { height: 180px; }
+.category-grid .category-card p { min-height: 42px; }
+
+@media (max-width: 1100px) {
+    .category-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 900px) {
+    .nav-shell { grid-template-columns: minmax(0, 1fr) auto; }
+    .nav-actions { display: none; }
+    .mobile-menu-actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        padding-top: 14px;
+        margin-top: 10px;
+        border-top: 1px solid var(--line);
+    }
+    .mobile-menu-actions .icon-button,
+    .mobile-menu-actions .auth-link,
+    .mobile-menu-actions .link-button {
+        width: 100%;
+        min-height: 42px;
+        display: inline-flex;
+        text-align: center;
+    }
+    .mobile-menu-actions .inline-form { display: block; }
+    .category-grid,
+    .all-categories-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+    .all-categories-grid .category-card {
+        grid-template-columns: 1fr;
+        padding: 10px;
+        min-height: 0;
+    }
+    .all-categories-grid .category-card-image {
+        height: 118px;
+        border-radius: 16px;
+    }
+    .all-categories-grid .category-card h3 {
+        font-size: .94rem;
+        line-height: 1.35;
+        margin-bottom: 5px;
+    }
+    .all-categories-grid .category-card p {
+        min-height: 36px;
+        max-height: 36px;
+        font-size: .75rem;
+        line-height: 1.45;
+        overflow: hidden;
+        margin: 0 0 8px;
+    }
+    .all-categories-grid .category-card a { font-size: .78rem; }
+}
+
+@media (max-width: 380px) {
+    .all-categories-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .all-categories-grid .category-card { grid-template-columns: 1fr; }
+    .all-categories-grid .category-card-image { height: 96px; }
+}

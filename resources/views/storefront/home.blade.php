@@ -32,8 +32,8 @@
             <h2>{{ __('messages.home.featured_categories') }}</h2>
             <p>{{ __('messages.home.featured_categories_subtitle') }}</p>
         </div>
-        <div class="category-carousel">
-            @forelse($featuredCategories as $category)
+        <div class="category-grid all-categories-grid">
+            @forelse($allCategories as $category)
                 <article class="category-card">
                     <div class="category-card-image">
                         <img loading="lazy" src="{{ $category->image_path ? asset('storage/'.$category->image_path) : asset('images/category-placeholder.svg') }}" alt="{{ $category->localizedName() }}">

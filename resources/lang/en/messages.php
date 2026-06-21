@@ -28,8 +28,8 @@ return [
     ],
     'home' => [
         'meta_title' => 'Industrial Ecommerce Store',
-        'featured_categories' => 'Featured Categories',
-        'featured_categories_subtitle' => 'Browse high-demand industrial segments with fast access to products and subcategories.',
+        'featured_categories' => 'All Categories',
+        'featured_categories_subtitle' => 'Browse every available store category and reach the right products quickly.',
         'view_products' => 'View Products',
         'featured_products' => 'Featured Products',
         'featured_products_subtitle' => 'Fast-moving industrial products selected for quality, reliability, and field performance.',

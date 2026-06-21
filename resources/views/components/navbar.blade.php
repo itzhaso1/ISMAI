@@ -31,6 +31,21 @@
             <a href="#category-strip">{{ __('messages.nav.categories') }}</a>
             <a href="{{ route('about') }}" @class(['active' => request()->routeIs('about')])>{{ __('messages.nav.about') }}</a>
             <a href="{{ route('contact') }}" @class(['active' => request()->routeIs('contact')])>{{ __('messages.nav.contact') }}</a>
+            <div class="mobile-menu-actions">
+                <a class="icon-button" href="{{ route('locale.switch', $nextLocale) }}">{{ __('messages.nav.language') }}</a>
+                <button class="icon-button" type="button" data-theme-toggle aria-label="{{ __('messages.nav.theme') }}">◐</button>
+                <a class="icon-button" href="#" aria-label="{{ __('messages.nav.cart') }}">{{ __('messages.nav.cart') }}</a>
+                @auth
+                    <a class="icon-button" href="{{ route('admin.dashboard') }}">{{ __('messages.nav.account') }}</a>
+                    <form action="{{ route('logout') }}" method="POST" class="inline-form">
+                        @csrf
+                        <button class="link-button" type="submit">{{ __('messages.nav.logout') }}</button>
+                    </form>
+                @else
+                    <a class="auth-link" href="{{ route('login') }}">{{ __('messages.nav.login') }}</a>
+                    <a class="auth-link filled" href="{{ route('register') }}">{{ __('messages.nav.register') }}</a>
+                @endauth
+            </div>
         </nav>
 
         <form class="live-search" action="{{ route('products.index') }}" method="GET" data-live-search>

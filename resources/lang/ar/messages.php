@@ -28,8 +28,8 @@ return [
     ],
     'home' => [
         'meta_title' => 'متجر إلكتروني صناعي',
-        'featured_categories' => 'الأقسام المميزة',
-        'featured_categories_subtitle' => 'وصول سريع لأهم الأقسام الصناعية والتصنيفات الفرعية الأكثر طلبًا.',
+        'featured_categories' => 'جميع الأقسام',
+        'featured_categories_subtitle' => 'تصفح كل الأقسام المتوفرة في المتجر واختر المنتجات المناسبة بسرعة.',
         'view_products' => 'عرض المنتجات',
         'featured_products' => 'منتجات مميزة',
         'featured_products_subtitle' => 'منتجات صناعية مختارة بعناية للجودة والاعتمادية والأداء العالي.',

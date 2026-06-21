@@ -27,12 +27,9 @@ class HomeController extends Controller
         return view('storefront.home', [
             'sections' => $sections,
             'sliders' => Slider::active()->orderBy('sort_order')->get(),
-            'featuredCategories' => Category::active()
-                ->whereNull('parent_id')
-                ->where('is_featured', true)
+            'allCategories' => Category::active()
                 ->with(['children' => fn ($query) => $query->active()->withCount('products')->orderBy('sort_order')])
                 ->orderBy('sort_order')
-                ->take(8)
                 ->get(),
             'featuredProducts' => Product::active()
                 ->featured()
