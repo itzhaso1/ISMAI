@@ -129,7 +129,21 @@ class ProductController extends Controller
             'short_description_en' => ['nullable', 'string'],
             'description_ar' => ['nullable', 'string'],
             'description_en' => ['nullable', 'string'],
-            'specifications_json' => ['nullable', 'json'],
+            'specifications_json' => [
+                'nullable',
+                'json',
+                function (string $attribute, mixed $value, \Closure $fail): void {
+                    if ($value === null || trim((string) $value) === '') {
+                        return;
+                    }
+
+                    $decoded = json_decode((string) $value, true);
+
+                    if (! is_array($decoded)) {
+                        $fail('المواصفات يجب أن تكون كائن أو مصفوفة JSON مثل {"Material":"Steel"} وليست رقمًا أو نصًا منفردًا.');
+                    }
+                },
+            ],
             'price' => ['required', 'numeric', 'min:0'],
             'compare_at_price' => ['nullable', 'numeric', 'min:0'],
             'stock_quantity' => ['nullable', 'integer', 'min:0'],
@@ -163,11 +177,13 @@ class ProductController extends Controller
 
     private function decodeSpecifications(?string $json): ?array
     {
-        if (! $json) {
+        if (! $json || trim($json) === '') {
             return null;
         }
 
-        return json_decode($json, true, flags: JSON_THROW_ON_ERROR);
+        $decoded = json_decode($json, true, flags: JSON_THROW_ON_ERROR);
+
+        return is_array($decoded) ? $decoded : null;
     }
 
     private function nextSku(): string
