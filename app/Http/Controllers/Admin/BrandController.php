@@ -34,7 +34,7 @@ class BrandController extends Controller
 
         Brand::create($data);
 
-        return redirect()->route('admin.brands.index')->with('status', 'Brand created successfully.');
+        return redirect()->route('admin.brands.index')->with('status', 'تم إنشاء العلامة التجارية بنجاح.');
     }
 
     public function edit(Brand $brand): View
@@ -54,16 +54,16 @@ class BrandController extends Controller
 
         $brand->update($data);
 
-        return redirect()->route('admin.brands.index')->with('status', 'Brand updated successfully.');
+        return redirect()->route('admin.brands.index')->with('status', 'تم تحديث العلامة التجارية بنجاح.');
     }
 
     public function destroy(Brand $brand): RedirectResponse
     {
-        abort_if($brand->products()->exists(), 422, 'Brand contains products.');
+        abort_if($brand->products()->exists(), 422, 'لا يمكن حذف العلامة التجارية لأنها تحتوي على منتجات.');
 
         $brand->delete();
 
-        return redirect()->route('admin.brands.index')->with('status', 'Brand deleted successfully.');
+        return redirect()->route('admin.brands.index')->with('status', 'تم حذف العلامة التجارية بنجاح.');
     }
 
     private function validated(Request $request, ?Brand $brand = null): array

@@ -60,7 +60,7 @@ class SiteSettingController extends Controller
 
         $this->settings->clearSettingsCache();
 
-        return redirect()->route('admin.settings.edit')->with('status', 'Site settings updated successfully.');
+        return redirect()->route('admin.settings.edit')->with('status', 'تم تحديث إعدادات الموقع بنجاح.');
     }
 
     private function lines(string $value): array

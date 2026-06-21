@@ -33,7 +33,7 @@ class ContentBlockController extends Controller
         Setting::create($this->validated($request));
         $this->settings->clearSettingsCache();
 
-        return redirect()->route('admin.content-blocks.index')->with('status', 'Content block created successfully.');
+        return redirect()->route('admin.content-blocks.index')->with('status', 'تم إنشاء النص الثابت بنجاح.');
     }
 
     public function edit(Setting $contentBlock): View
@@ -50,7 +50,7 @@ class ContentBlockController extends Controller
         $contentBlock->update($this->validated($request, $contentBlock));
         $this->settings->clearSettingsCache();
 
-        return redirect()->route('admin.content-blocks.index')->with('status', 'Content block updated successfully.');
+        return redirect()->route('admin.content-blocks.index')->with('status', 'تم تحديث النص الثابت بنجاح.');
     }
 
     public function destroy(Setting $contentBlock): RedirectResponse
@@ -60,7 +60,7 @@ class ContentBlockController extends Controller
         $contentBlock->delete();
         $this->settings->clearSettingsCache();
 
-        return redirect()->route('admin.content-blocks.index')->with('status', 'Content block deleted successfully.');
+        return redirect()->route('admin.content-blocks.index')->with('status', 'تم حذف النص الثابت بنجاح.');
     }
 
     private function validated(Request $request, ?Setting $setting = null): array

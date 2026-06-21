@@ -43,7 +43,7 @@ class CategoryController extends Controller
         Category::create($data);
         $this->settings->clearNavigationCache();
 
-        return redirect()->route('admin.categories.index')->with('status', 'Category created successfully.');
+        return redirect()->route('admin.categories.index')->with('status', 'تم إنشاء القسم بنجاح.');
     }
 
     public function edit(Category $category): View
@@ -67,17 +67,17 @@ class CategoryController extends Controller
         $category->update($data);
         $this->settings->clearNavigationCache();
 
-        return redirect()->route('admin.categories.index')->with('status', 'Category updated successfully.');
+        return redirect()->route('admin.categories.index')->with('status', 'تم تحديث القسم بنجاح.');
     }
 
     public function destroy(Category $category): RedirectResponse
     {
-        abort_if($category->children()->exists() || $category->products()->exists(), 422, 'Category contains children or products.');
+        abort_if($category->children()->exists() || $category->products()->exists(), 422, 'لا يمكن حذف القسم لأنه يحتوي على أقسام فرعية أو منتجات.');
 
         $category->delete();
         $this->settings->clearNavigationCache();
 
-        return redirect()->route('admin.categories.index')->with('status', 'Category deleted successfully.');
+        return redirect()->route('admin.categories.index')->with('status', 'تم حذف القسم بنجاح.');
     }
 
     private function validated(Request $request, ?Category $category = null): array

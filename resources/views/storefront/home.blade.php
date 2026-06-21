@@ -5,8 +5,28 @@
 @section('content')
     <x-hero-slider :sliders="$sliders" />
 
+    @if(data_get($sections, 'featured_products', true))
+    <section class="section-shell muted-section">
+        <div class="section-heading split-heading">
+            <div>
+                <span>{{ __('messages.nav.products') }}</span>
+                <h2>{{ __('messages.home.featured_products') }}</h2>
+                <p>{{ __('messages.home.featured_products_subtitle') }}</p>
+            </div>
+            <a class="section-link" href="{{ route('products.index') }}">{{ __('messages.home.view_products') }}</a>
+        </div>
+        <div class="product-grid featured-products-grid">
+            @forelse($featuredProducts as $product)
+                <x-product-card :product="$product" />
+            @empty
+                <div class="empty-state">{{ __('messages.nav.search_empty') }}</div>
+            @endforelse
+        </div>
+    </section>
+    @endif
+
     @if(data_get($sections, 'featured_categories', true))
-    <section class="section-shell">
+    <section class="section-shell homepage-categories">
         <div class="section-heading">
             <span>{{ __('messages.nav.categories') }}</span>
             <h2>{{ __('messages.home.featured_categories') }}</h2>
@@ -32,26 +52,6 @@
                         <a href="{{ route('products.index') }}">{{ __('messages.home.view_products') }}</a>
                     </div>
                 </article>
-            @endforelse
-        </div>
-    </section>
-    @endif
-
-    @if(data_get($sections, 'featured_products', true))
-    <section class="section-shell muted-section">
-        <div class="section-heading split-heading">
-            <div>
-                <span>{{ __('messages.nav.products') }}</span>
-                <h2>{{ __('messages.home.featured_products') }}</h2>
-                <p>{{ __('messages.home.featured_products_subtitle') }}</p>
-            </div>
-            <a class="section-link" href="{{ route('products.index') }}">{{ __('messages.home.view_products') }}</a>
-        </div>
-        <div class="product-grid">
-            @forelse($featuredProducts as $product)
-                <x-product-card :product="$product" />
-            @empty
-                <div class="empty-state">{{ __('messages.nav.search_empty') }}</div>
             @endforelse
         </div>
     </section>

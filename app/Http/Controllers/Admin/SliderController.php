@@ -34,7 +34,7 @@ class SliderController extends Controller
 
         Slider::create($data);
 
-        return redirect()->route('admin.sliders.index')->with('status', 'Slider created successfully.');
+        return redirect()->route('admin.sliders.index')->with('status', 'تم إنشاء السلايد بنجاح.');
     }
 
     public function edit(Slider $slider): View
@@ -56,7 +56,7 @@ class SliderController extends Controller
 
         $slider->update($data);
 
-        return redirect()->route('admin.sliders.index')->with('status', 'Slider updated successfully.');
+        return redirect()->route('admin.sliders.index')->with('status', 'تم تحديث السلايد بنجاح.');
     }
 
     public function destroy(Slider $slider): RedirectResponse
@@ -67,7 +67,7 @@ class SliderController extends Controller
 
         $slider->delete();
 
-        return redirect()->route('admin.sliders.index')->with('status', 'Slider deleted successfully.');
+        return redirect()->route('admin.sliders.index')->with('status', 'تم حذف السلايد بنجاح.');
     }
 
     private function validated(Request $request): array

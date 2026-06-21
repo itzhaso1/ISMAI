@@ -39,13 +39,13 @@ class OrderController extends Controller
 
         $order->update($data);
 
-        return redirect()->route('admin.orders.show', $order)->with('status', 'Order updated successfully.');
+        return redirect()->route('admin.orders.show', $order)->with('status', 'تم تحديث الطلب بنجاح.');
     }
 
     public function destroy(Order $order): RedirectResponse
     {
         $order->delete();
 
-        return redirect()->route('admin.orders.index')->with('status', 'Order deleted successfully.');
+        return redirect()->route('admin.orders.index')->with('status', 'تم حذف الطلب بنجاح.');
     }
 }

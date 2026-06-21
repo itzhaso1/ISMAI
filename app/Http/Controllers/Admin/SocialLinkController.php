@@ -32,7 +32,7 @@ class SocialLinkController extends Controller
         SocialLink::create($this->validated($request));
         $this->settings->clearSocialCache();
 
-        return redirect()->route('admin.social-links.index')->with('status', 'Social link created successfully.');
+        return redirect()->route('admin.social-links.index')->with('status', 'تم إنشاء رابط التواصل بنجاح.');
     }
 
     public function edit(SocialLink $socialLink): View
@@ -45,7 +45,7 @@ class SocialLinkController extends Controller
         $socialLink->update($this->validated($request));
         $this->settings->clearSocialCache();
 
-        return redirect()->route('admin.social-links.index')->with('status', 'Social link updated successfully.');
+        return redirect()->route('admin.social-links.index')->with('status', 'تم تحديث رابط التواصل بنجاح.');
     }
 
     public function destroy(SocialLink $socialLink): RedirectResponse
@@ -53,7 +53,7 @@ class SocialLinkController extends Controller
         $socialLink->delete();
         $this->settings->clearSocialCache();
 
-        return redirect()->route('admin.social-links.index')->with('status', 'Social link deleted successfully.');
+        return redirect()->route('admin.social-links.index')->with('status', 'تم حذف رابط التواصل بنجاح.');
     }
 
     private function validated(Request $request): array

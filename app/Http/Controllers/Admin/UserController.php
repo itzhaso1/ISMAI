@@ -32,7 +32,7 @@ class UserController extends Controller
 
         User::create($data);
 
-        return redirect()->route('admin.users.index')->with('status', 'User created successfully.');
+        return redirect()->route('admin.users.index')->with('status', 'تم إنشاء المستخدم بنجاح.');
     }
 
     public function edit(User $user): View
@@ -52,16 +52,16 @@ class UserController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('admin.users.index')->with('status', 'User updated successfully.');
+        return redirect()->route('admin.users.index')->with('status', 'تم تحديث المستخدم بنجاح.');
     }
 
     public function destroy(Request $request, User $user): RedirectResponse
     {
-        abort_if($request->user()->is($user), 422, 'You cannot delete your own account.');
+        abort_if($request->user()->is($user), 422, 'لا يمكنك حذف حسابك الحالي.');
 
         $user->delete();
 
-        return redirect()->route('admin.users.index')->with('status', 'User deleted successfully.');
+        return redirect()->route('admin.users.index')->with('status', 'تم حذف المستخدم بنجاح.');
     }
 
     private function validated(Request $request, ?User $user = null): array

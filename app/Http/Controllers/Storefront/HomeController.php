@@ -38,7 +38,7 @@ class HomeController extends Controller
                 ->featured()
                 ->with(['category', 'brand', 'images'])
                 ->latest()
-                ->take(9)
+                ->take(6)
                 ->get(),
             'brands' => Brand::active()->orderBy('sort_order')->get(),
         ]);

@@ -58,7 +58,7 @@ class ProductController extends Controller
             $product->update(['main_image_path' => $product->images()->first()->image_path]);
         }
 
-        return redirect()->route('admin.products.index')->with('status', 'Product created successfully.');
+        return redirect()->route('admin.products.index')->with('status', 'تم إنشاء المنتج بنجاح.');
     }
 
     public function edit(Product $product): View
@@ -88,7 +88,7 @@ class ProductController extends Controller
         $product->update($data);
         $this->storeImages($request, $product);
 
-        return redirect()->route('admin.products.edit', $product)->with('status', 'Product updated successfully.');
+        return redirect()->route('admin.products.edit', $product)->with('status', 'تم تحديث المنتج بنجاح.');
     }
 
     public function destroy(Product $product): RedirectResponse
@@ -103,7 +103,7 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return redirect()->route('admin.products.index')->with('status', 'Product deleted successfully.');
+        return redirect()->route('admin.products.index')->with('status', 'تم حذف المنتج بنجاح.');
     }
 
     public function destroyImage(Product $product, ProductImage $image): RedirectResponse
@@ -113,7 +113,7 @@ class ProductController extends Controller
         Storage::disk('public')->delete($image->image_path);
         $image->delete();
 
-        return back()->with('status', 'Product image deleted successfully.');
+        return back()->with('status', 'تم حذف صورة المنتج بنجاح.');
     }
 
     private function validated(Request $request, ?Product $product = null): array
